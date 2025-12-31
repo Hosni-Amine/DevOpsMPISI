@@ -55,6 +55,85 @@ Ce document présente l'état de réalisation de chaque tâche demandée dans l'
 **Commentaire :** 
 
 - Token créé dans SonarCloud : My Account → Security → Existing Tokens
-- Capture d'écran : ![Token SonarCloud généré](docs/images/sonarcloud-token-generated.png)
+- Secret ajouté dans GitHub : Repository → Settings → Secrets and variables → Actions
+- Capture d'écran du token : ![Token SonarCloud généré](docs/images/sonarcloud-token-generated.png)
+- Capture d'écran du secret GitHub : ![Secret SONAR_TOKEN dans GitHub](docs/images/github-secret-sonar-token.png)
+
+### Tâche 2.5 : Ajouter les propriétés SonarCloud dans pom.xml
+**Commentaire :** 
+- Toutes les propriétés SonarCloud sont correctement configurées dans le `pom.xml`
+
+**- Configuration dans `pom.xml` (lignes 42-51) :**
+```xml
+<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<sonar.organization>hosni-mohamed-amine</sonar.organization>
+<sonar.projectKey>Hosni-Amine_DevOpsMPISI</sonar.projectKey>
+<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+<sonar.sources>src/main/java</sonar.sources>
+<sonar.tests>src/test/java</sonar.tests>
+<sonar.java.binaries>target/classes</sonar.java.binaries>
+<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+<sonar.exclusions>**/*Application.java,**/dto/**,**/config/**</sonar.exclusions>
+```
+
+---
+
+### Tâche 2.6 : Lancer une analyse locale : `mvn clean verify sonar:sonar -Dsonar.token=VOTRE_TOKEN`
+**Commentaire :** 
+- Analyse locale SonarCloud exécutée avec succès
+
+**Commande exécutée :**
+```bash
+./mvnw clean verify sonar:sonar -Dsonar.token=fd562425fc31710858cc461ccc507d7f80134873
+```
+
+**Résultat :**
+-  **ANALYSIS SUCCESSFUL**
+-  **BUILD SUCCESS**
+- Temps total : 59.501 s
+- Temps d'analyse : 53.827 s
+
+- Capture d'écran de l'analyse locale réussie : ![Analyse locale SonarCloud réussie](docs/images/sonarcloud-local-analysis-success.png)
+
+---
+
+### Tâche 2.7 : Vérifier les résultats sur le dashboard SonarCloud
+**Commentaire :** 
+- Dashboard SonarCloud accessible et résultats vérifiés
+
+**Résultats de l'analyse :**
+- **Quality Gate** : Failed (1 condition échouée)
+- **Security** : 0 Open issues, Grade A 
+- **Reliability** : 1 Open issues, Grade E
+- **Maintainability** : 13 Open issues, Grade A 
+- **Coverage** : 15.4% (64 Lines to cover)
+- **Duplications** : 0.0% (231 Lines)
+- **Security Hotspots** : 1
+- **Lines of Code** : 161 lignes
+
+  - Capture d'écran du dashboard SonarCloud : ![Dashboard SonarCloud - Résultats de l'analyse](docs/images/sonarcloud-dashboard-results.png)
+
+---
+
+## 3. Pipeline GitHub Actions
+
+### Tâche 3.1 : Créer le répertoire `.github/workflows/`
+**Commentaire :** 
+- Le répertoire `.github/workflows/` existe
+
+---
+
+### Tâche 3.2 : Créer le fichier `ci.yml` avec le pipeline CI/CD
+**Commentaire :** 
+- Le fichier `ci.yml` est créé et contient un pipeline CI/CD
+- Déclenchement sur push et pull request vers main/master/develop
+
+---
+
+### Tâche 3.3 : Ajouter le secret SONAR_TOKEN dans GitHub
+**Commentaire :** 
+- Secret `SONAR_TOKEN` ajouté dans GitHub Secrets (déjà fait dans la tâche 2.4)
+- Utilisé dans le pipeline via : `${{ secrets.SONAR_TOKEN }}`
+- Voir la tâche 2.4 pour les détails et la capture d'écran
 
 ---

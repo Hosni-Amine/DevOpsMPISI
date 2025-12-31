@@ -1,20 +1,20 @@
-package com.example.projetmpisi.entity;
+    package com.example.projetmpisi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+    import jakarta.persistence.Entity;
+    import jakarta.persistence.Id;
+    import jakarta.persistence.Table;
+    import lombok.*;
 
-@Entity
-@Table(name = "users")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter @Setter
-public class User {
+    @Entity
+    @Table(name = "users")
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter @Setter
+    public class User {
 
-    @Id
-    private int id;
-    private String username;
-    private String email;
+        @Id
+        private int id;
+        private String username;
+        private String email;
 
-}
+    }
