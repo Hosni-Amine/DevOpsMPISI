@@ -44,3 +44,15 @@ Ce document présente l'état de réalisation de chaque tâche demandée dans l'
 - Dans `sonar-project.properties` (ligne 2) : `sonar.organization=hosni-mohamed-amine`
 
 ---
+
+### Tâche 2.3 : Importer le projet depuis GitHub
+**Commentaire :** 
+- ✅ Le projet a été poussé vers GitHub : https://github.com/Hosni-Amine/DevOpsMPISI.git
+- ✅ **Projet importé dans SonarCloud**
+
+**Preuve :**
+- URL du projet SonarCloud : https://sonarcloud.io/project/overview?id=Hosni-Amine_DevOpsMPISI
+- Le projet est visible et accessible sur SonarCloud
+- Project Key : `Hosni-Amine_DevOpsMPISI` (configuré dans `pom.xml` et `sonar-project.properties`)
+
+---
