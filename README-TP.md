@@ -142,13 +142,4 @@ Ce document présente l'état de réalisation de chaque tâche demandée dans l'
 **Commentaire :** 
 - Commit créé avec succès
 - Code poussé vers GitHub : https://github.com/Hosni-Amine/DevOpsMPISI.git
-
-**Preuve :**
 - Commit hash : `46f1355`
-- Message : "Document tasks 2.6-2.7 and 3.1-3.3: SonarCloud analysis and GitHub Actions pipeline setup"
-- Fichiers inclus :
-  - `README-ACADEMIQUE.md` (modifié)
-  - `.github/workflows/build.yml` (nouveau)
-  - Images de documentation (4 nouvelles images)
-
----
