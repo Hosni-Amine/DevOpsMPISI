@@ -263,6 +263,13 @@
                 </executions>
             </plugin>
 
+            <!-- Plugin SonarCloud pour l'analyse de code -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.11.0.3922</version>
+            </plugin>
+
             <!-- Plugin Spring Boot pour la gestion des dépendances et de la construction du projet -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -39,7 +39,6 @@ Ce document présente l'état de réalisation de chaque tâche demandée dans l'
 ### Tâche 2.2 : Créer une nouvelle organisation
 **Commentaire :** L'organisation SonarCloud "hosni-mohamed-amine" a été créée et configurée dans le projet.
 
-**Preuve :**
 - Dans `pom.xml` (ligne 44) : `<sonar.organization>hosni-mohamed-amine</sonar.organization>`
 - Dans `sonar-project.properties` (ligne 2) : `sonar.organization=hosni-mohamed-amine`
 
@@ -47,12 +46,15 @@ Ce document présente l'état de réalisation de chaque tâche demandée dans l'
 
 ### Tâche 2.3 : Importer le projet depuis GitHub
 **Commentaire :** 
-- ✅ Le projet a été poussé vers GitHub : https://github.com/Hosni-Amine/DevOpsMPISI.git
-- ✅ **Projet importé dans SonarCloud**
-
-**Preuve :**
+- Le projet a été publié sur GitHub et importé dans SonarCloud : https://github.com/Hosni-Amine/DevOpsMPISI.git
 - URL du projet SonarCloud : https://sonarcloud.io/project/overview?id=Hosni-Amine_DevOpsMPISI
-- Le projet est visible et accessible sur SonarCloud
-- Project Key : `Hosni-Amine_DevOpsMPISI` (configuré dans `pom.xml` et `sonar-project.properties`)
+
+---
+
+### Tâche 2.4 : Générer un token d'authentification
+**Commentaire :** 
+
+- Token créé dans SonarCloud : My Account → Security → Existing Tokens
+- Capture d'écran : ![Token SonarCloud généré](docs/images/sonarcloud-token-generated.png)
 
 ---
