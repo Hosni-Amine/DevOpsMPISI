@@ -49,17 +49,19 @@ public class ExempleAvecBugs {
         }
     }
 
-    // CODE SMELL 2: Code dupliqué
-    public void methode1() {
+    // CODE SMELL 2: Code dupliqué - CORRIGÉ
+    private void afficherTraitement() {
         System.out.println("Début du traitement");
         System.out.println("Traitement en cours...");
         System.out.println("Fin du traitement");
     }
 
+    public void methode1() {
+        afficherTraitement();
+    }
+
     public void methode2() {
-        System.out.println("Début du traitement");
-        System.out.println("Traitement en cours...");
-        System.out.println("Fin du traitement");
+        afficherTraitement();
     }
 
     // VULNERABILITY: Injection SQL potentielle

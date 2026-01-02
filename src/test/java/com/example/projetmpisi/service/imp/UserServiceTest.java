@@ -62,4 +62,21 @@ class UserServiceTest {
         assertFalse(result.isPresent());
     }
 
+    @Test
+    void testUpdateUser() {
+        User user = new User(1, "Amine Hosni", "amine.hosni@example.com");
+        when(userRepository.existsById(1)).thenReturn(true);
+        when(userRepository.save(user)).thenReturn(user);
+        User result = userService.updateUser(1, user);
+        assertNotNull(result);
+    }
+
+    @Test
+    void testUpdateUser_notFound() {
+        User user = new User(1, "Amine Hosni", "amine.hosni@example.com");
+        when(userRepository.existsById(1)).thenReturn(false);
+        User result = userService.updateUser(1, user);
+        assertNull(result);
+    }
+
 }
