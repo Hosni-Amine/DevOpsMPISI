@@ -1,13 +1,168 @@
-# Exercice Pratique DevOps - Rapport de Réalisation
-
-Ce document présente l'état de réalisation de chaque tâche demandée dans l'exercice pratique DevOps.
-
-# Projet Spring Boot avec JaCoCo - Documentation
+# Projet Spring Boot DevOps - DevOpsMPISI
 
 [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=Hosni-Amine_DevOpsMPISI&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Hosni-Amine_DevOpsMPISI)
 [![Build Status](https://github.com/Hosni-Amine/DevOpsMPISI/workflows/CI%20Pipeline/badge.svg)](https://github.com/Hosni-Amine/DevOpsMPISI/actions)
 
-## Objectif du Projet
+Application Spring Boot avec intégration DevOps : CI/CD, SonarCloud, Docker, et tests avec JaCoCo.
+
+---
+
+## Table des matières
+
+- [Getting Started](#getting-started)
+- [Commandes Docker](#commandes-docker)
+- [Processus CI/CD](#processus-cicd)
+- [Rapport de Réalisation](#rapport-de-réalisation)
+
+---
+
+## 🚀 Getting Started
+
+### Prérequis
+
+- **Java 17** ou supérieur
+- **Maven 3.6+** (ou utilisez le Maven : `./mvnw`)
+- **Docker** et **Docker Compose** (pour la dockerisation)
+- **Git** (pour cloner le repository)
+
+### Installation
+
+1. **Cloner le repository :**
+   ```bash
+   git clone https://github.com/Hosni-Amine/DevOpsMPISI.git
+   cd DevOpsMPISI
+   ```
+
+2. **Vérifier que Maven fonctionne :**
+   ```bash
+   ./mvnw clean test
+   ```
+ 
+3. **Compiler le projet :**
+   ```bash
+   ./mvnw clean package
+   ```
+
+### Lancer l'application localement
+
+**Option 1 : Avec Maven (nécessite MySQL installé localement)**
+```bash
+./mvnw spring-boot:run
+```
+
+**Option 2 : Avec Docker (recommandé)**
+```bash
+# Builder l'image Docker
+docker build -t mon-app:latest .
+
+# Lancer avec Docker Compose (inclut MySQL)
+docker-compose up -d
+```
+
+L'application sera accessible sur : **http://localhost:8080**
+
+### Tests
+
+**Lancer les tests unitaires :**
+```bash
+./mvnw test
+```
+
+**Générer le rapport de couverture JaCoCo :**
+```bash
+./mvnw verify
+```
+
+Le rapport sera disponible dans : `target/site/jacoco/index.html`
+
+---
+
+## Commandes Docker
+
+### Build de l'image
+
+```bash
+# Build standard
+docker build -t mon-app:latest .
+
+### Docker Compose
+
+**Lancer les services (MySQL + Application) :**
+```bash
+docker-compose up -d
+```
+
+**Voir les logs :**
+```bash
+# Logs de tous les services
+docker-compose logs -f
+
+# Logs d'un service spécifique
+docker-compose logs -f app
+docker-compose logs -f mysql
+```
+
+**Arrêter les services :**
+```bash
+docker-compose down
+```
+
+**Vérifier le statut des conteneurs :**
+```bash
+docker-compose ps
+```
+
+---
+
+## 🔄 Processus CI/CD
+
+### Pipeline GitHub Actions
+
+Le projet utilise **GitHub Actions** pour automatiser le processus CI/CD.
+
+#### Workflows disponibles
+
+1. **CI Pipeline** (`.github/workflows/ci.yml`)
+   - Déclenchement : Push sur `main`, `master`, `develop` ou Pull Request
+   - Étapes :
+     - Checkout du code
+     - Configuration Java 17
+     - Compilation (`mvn clean compile`)
+     - Tests (`mvn test`)
+     - Génération rapport JaCoCo (`mvn verify`)
+     - Analyse SonarCloud (`mvn sonar:sonar`)
+
+2. **SonarQube Pipeline** (`.github/workflows/build.yml`)
+   - Déclenchement : Push sur `main` ou Pull Request
+   - Étapes :
+     - Checkout du code
+     - Configuration Java 17
+     - Cache Maven et SonarQube
+     - Build et analyse SonarCloud
+
+#### Vérifier le statut des pipelines
+
+- **GitHub Actions** : https://github.com/Hosni-Amine/DevOpsMPISI/actions
+- Le badge de build en haut du README affiche le statut en temps réel
+
+#### Analyse SonarCloud
+
+L'analyse SonarCloud est automatiquement déclenchée à chaque push sur la branche `main`.
+
+### Analyse locale SonarCloud (optionnel)
+
+Pour lancer une analyse SonarCloud localement :
+
+```bash
+./mvnw clean verify sonar:sonar -Dsonar.token=VOTRE_TOKEN
+```
+
+
+---
+
+## 📊 Rapport de Réalisation
+
+Ce document présente l'état de réalisation de chaque tâche demandée dans l'exercice pratique DevOps.
 
 ---
 
@@ -518,5 +673,33 @@ docker-compose logs -f
 **Correction appliquée :**
 - Extraction du code commun dans une méthode privée `afficherTraitement()`
 - Refactorisation des deux méthodes pour utiliser la méthode commune
+
+**Fichier modifié :**
+- `src/main/java/com/example/projetmpisi/demo/ExempleAvecBugs.java`
+
+---
+
+### Tâche 7.2 : Relancer l'analyse et vérifier l'amélioration
+**Commentaire :** 
+- Analyse SonarCloud relancée après correction du code smell via push GitHub
+- Vérification de la réduction du nombre de code smells
+
+**Résultats de l'analyse (après push) :**
+
+**AVANT la correction :**
+- **Maintainability** : 13 Open issues, Grade A
+- **Code smells** : 13 détectés
+
+**APRÈS la correction :**
+- **Maintainability** : 9 Open issues, Grade A
+- **Code smells** : 9 détectés (-4 code smells)
+- **Coverage** : 24.4% (amélioration de 15.4% à 24.4%)
+
+**Amélioration :**
+- Réduction de **4 code smells** (code dupliqué éliminé + autres améliorations)
+- La maintenabilité du code s'est améliorée
+- Couverture de code augmentée
+
+- Capture d'écran du dashboard SonarCloud après correction : ![Dashboard SonarCloud après correction](docs/images/sonarcloud-dashboard-after-fix.png)
 
 ---
