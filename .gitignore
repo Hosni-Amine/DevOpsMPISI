@@ -31,3 +31,29 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Dossiers Maven
+target/
+.mvn/
+mvnw
+mvnw.cmd
+# Fichiers IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+# Fichiers Git
+.git/
+.gitignore
+# Logs
+*.log
+logs/
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+# Autres
+.env

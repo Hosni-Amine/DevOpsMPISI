@@ -1,47 +1,72 @@
+version: '3.8'
 services:
+  # ============================================
   # Service MySQL
+  # ============================================
   mysql:
     image: mysql:8.0
     container_name: projetmpisi-mysql
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: projetmpisi_db
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass123
     ports:
-      - "3306:3306"
+      - "3307:3306" # Port hôte:port conteneur (3307 pour éviter conflit)
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mpisi-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p12345"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - app-network
+      start_period: 30s
 
+  # ============================================
   # Service Application Spring Boot
+  # ============================================
   app:
-    image: mon-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: projetmpisi-app
+    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/projetmpisi_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 12345
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: "true"
-      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      # Configuration de la base de données
+      DATABASE_URL: jdbc:mysql://mysql:3306/projetmpisi_db
+      DATABASE_USER: appuser
+      DATABASE_PASSWORD: apppass123
+      # Profil Spring
+      SPRING_PROFILES_ACTIVE: prod
+      # Options JVM
+      JAVA_OPTS: -Xms256m -Xmx512m
     depends_on:
       mysql:
         condition: service_healthy
     networks:
-      - app-network
-    restart: unless-stopped
+      - mpisi-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/users"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
+# ============================================
+# Volumes
+# ============================================
 volumes:
-  mysql_data:
+  mysql-data:
+    driver: local
 
+# ============================================
+# Networks
+# ============================================
 networks:
-  app-network:
+  mpisi-network:
     driver: bridge
-
