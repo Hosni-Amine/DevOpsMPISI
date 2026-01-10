@@ -143,7 +143,7 @@ Cette approche réduit significativement la taille de l'image finale (de ~450MB 
 
 **Résultat :**
 
-![Démarrage des services Docker Compose](docs/dockerization/Screenshot%202026-01-04%20at%2019.22.32.png)
+![Démarrage les services Docker Compose](docs/dockerization/Screenshot%202026-01-04%20at%2019.22.32.png)
 
 ---
 
@@ -151,7 +151,7 @@ Cette approche réduit significativement la taille de l'image finale (de ~450MB 
 
 **Résultat :**
 
-![Vérification des conteneurs Docker Compose](docs/dockerization/Screenshot%202026-01-04%20at%2019.31.27.png)
+![Vérifier les Conteneurs](docs/dockerization/Screenshot%202026-01-04%20at%2019.31.27.png)
 
 ---
 
@@ -159,7 +159,7 @@ Cette approche réduit significativement la taille de l'image finale (de ~450MB 
 
 **Résultat :**
 
-![Vérification des conteneurs Docker Compose](docs/dockerization/Screenshot%202026-01-04%20at%2022.50.00.png)
+![Consulter les Logs](docs/dockerization/Screenshot%202026-01-04%20at%2022.50.00.png)
 
 ---
 
